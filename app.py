@@ -67,6 +67,13 @@ def handle_message(event):
             original_content_url='https://i.imgur.com/QPJ8A1b.png',
             preview_image_url='https://i.imgur.com/QPJ8A1b.png'
         )
+    elif event.message.text.startswith('貼圖'):
+        text = event.message.text
+        _, package_id, sticker_id = text.split('-')
+        message = StickerSendMessage(
+            package_id=int(package_id),
+            sticker_id=int(sticker_id)
+        )
     else:
         message = TextSendMessage(text=event.message.text)
     line_bot_api.reply_message(event.reply_token, message)
